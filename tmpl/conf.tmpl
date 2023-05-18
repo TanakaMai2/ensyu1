@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8"><link rel="stylesheet" href="css/style.css">
+<style type="text/css">
+
+
+span{
+    color:rgb(143, 4, 138);
+}
+.con_p{
+    text-align: center;
+    margin: 0 auto;
+    background-color: #e904a4;
+    color: #ffffff;
+    font-weight: bold;
+    height: 40px;
+    width: 550px;
+    line-height: 40px;
+    border-radius: 7px;
+    font-size: 1.2rem;
+}
+.con_fo{
+    width: 400px;
+    margin: 0 auto;
+}
+.con_fo p{
+    border-bottom: 2px solid rgb(83, 17, 45);
+    margin-top: 25px;
+    
+}
+.con_fo form{
+    text-align: center;
+    margin-top: 25px;
+}
+.con_fo form input{
+    border: 2px solid #f265be;
+    border-radius: 5px;
+    width: 90px;
+    height: 25px;
+    background-color: #ffeaff;
+}
+.con_fo form input:hover{
+    background-color: rgb(253, 179, 217);
+}
+
+</style>
+<title>フォーム</title>
+</head>
+
+<body>
+<p class="con_p">内容ご確認の上、よろしければ送信ボタンを押してください</p>
+<div class="con_fo">
+    <p>
+        ●お名前：<span>!name!</span>
+    </p>
+    <p>
+        ●メールアドレス：<span>!email!</span>
+    </p>
+    <p>
+        ●コメント：<span>!comment!</span>
+    </p>
+    <form action="form.php" method="post">
+    <input type="hidden" name="mode" value="send">
+    <input type="hidden" name="name" value="!name!">
+    <input type="hidden" name="radio" value="!radio!">
+    <input type="hidden" name="comment" value="!comment!">
+    <input type="button" value="前に戻る" onclick="history.back()">
+    <input type="submit" value="送信する">
+    </form>
+</div>
+</body>
+
+</html>

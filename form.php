@@ -1,36 +1,101 @@
 <?php
-$name = $_GET["name"];
-$radio = $_GET["radio"];
-$comment = $_GET["comment"];
+$name = $_POST["name"];
+$radio = $_POST["radio"];
+$comment = $_POST["comment"];
 
 $name = htmlentities($name,ENT_QUOTES,"UTF-8");
 $radio = htmlentities($radio,ENT_QUOTES,"UTF-8");
 $comment = htmlentities($comment,ENT_QUOTES,"UTF-8");
 
-$name
+$name = str_replace("\r\n","",$name);
+$radio = str_replace("\r\n","",$radio);
+$comment = str_replace("\r\n","",$comment);
 
-echo <<< _FORM_
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>確認画面</title>
-</head>
-<body>
-    <p>
-        ■お名前<br>
-        $name
-    </p>
-    <p>
-        ■好きな季節<br>
-        $radio
-    </p>
-    <p>
-        ■理由<br>
-        $comment
-    </p>
-</body>
-</html>
-_FORM_;
+if($name == ""){
+    error("名前が未入力です");
+}
+if($comment == ""){
+    error("コメントが未入力です");
+}
+
+if($_POST["mode"] == "post"){
+    conf_form();
+}
+else if ($_POST["mode"] == "send"){
+    send_form();
+}
+
+//確認画面
+function conf_form(){
+    global $name;
+    global $radio;
+    global $comment;
+
+    //テンプレート読み込み
+    $conf = fopen("tmpl/conf.tmpl","r") or die;
+    $size = filesize("tmpl/conf.tmpl");
+    $data = fread($conf , $size);
+    fclose($conf);
+
+    //文字置き換え
+    $data = str_replace("!name!",$name,$data);
+    $data = str_replace("!radio!",$radio,$data);
+    $data = str_replace("!comment",$comment,$data);
+
+    echo $data;
+    exit;
+}
+//エラー画面
+function error($msg){
+    //テンプレート読み込み
+    $error = fopen("tmpl/error.tmpl","r");
+    $size = filesize("tmpl/error.tmpl","r");
+    $data = fread($error,$size);
+
+    //文字置き換え
+    $data = str_replace("!errorm!",$msg,$data);
+    
+    echo $data;
+    exit;
+
+//データベースに飛ぶ
+    $dsn = 'mysql:host=localhost; dbname=ensyu; charset=utf8';
+    $user = 'testuser';
+    $pass = 'testpass';
+    
+    try{
+        global $name;
+        global $radio;
+        global $comment;
+
+        $dbh = new PDO($dns,$user,$pass);
+        $dbh = setAttribute(PDO::ATTR_ERRMODE, PDD::ERRMODE_EXCEPTION);
+        if($dbh == null){
+
+        }
+        else{
+            $SQL = "INSERT INTO form(お名前)VALUES(:name)";
+            $stmt1 = $dbh -> prepare($SQL);
+            $stmt1 ->bindParam(":name",$name);
+            $stmt1 ->execute();
+
+            $SQL = "INSERT INTO form(好きな季節)VALUES(:radio)";
+            $stmt2 = $dbh -> prepare($SQL);
+            $stmt2 ->bindParam(":radio",$radio);
+            $stmt2 ->execute();
+
+            $SQL = "INSERT INTO form(理由)VALUES(:comment)";
+            $stmt3 = $dbh -> prepare($SQL);
+            $stmt3 ->bindParam(":comment",$comment);
+            $stmt3 ->execute();
+        }
+    }
+    catch(PDOExeception $e){
+        echo "接続失敗";
+        echo "エラー内容".$e->getMEssage();
+        die();
+    }
+}
+
 
 ?>
