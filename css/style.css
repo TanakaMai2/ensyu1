@@ -1,0 +1,16 @@
+body{
+    width: 800px;
+    margin: 0 auto;
+}
+
+h1{
+    background-color: rgb(255, 247, 223);
+    color: #fff;
+    text-shadow: 0.2mm 0.2mm 1.5mm #ac6700;
+    text-align: center;
+}
+
+.fo{
+    margin: 0 auto;
+    text-align: center;
+}

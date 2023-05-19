@@ -21,7 +21,7 @@ if($comment == ""){
 if($_POST["mode"] == "post"){
     conf_form();
 }
-else if ($_POST["mode"] == "send"){
+elseif($_POST["mode"] == "send"){
     send_form();
 }
 
@@ -57,18 +57,18 @@ function error($msg){
     
     echo $data;
     exit;
-
+}
 //データベースに飛ぶ
-    $dsn = 'mysql:host=localhost; dbname=ensyu; charset=utf8';
-    $user = 'testuser';
-    $pass = 'testpass';
-    
+
+function send_form(){
     try{
         global $name;
         global $radio;
         global $comment;
-
-        $dbh = new PDO($dns,$user,$pass);
+        $dsn = 'mysql:host=localhost; dbname=ensyu; charset=utf8';
+        $user = 'testuser';
+        $pass = 'testpass';
+        $dbh = new PDO($dsn,$user,$pass);
         $dbh = setAttribute(PDO::ATTR_ERRMODE, PDD::ERRMODE_EXCEPTION);
         if($dbh == null){
 
