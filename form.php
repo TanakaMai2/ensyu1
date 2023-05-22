@@ -1,4 +1,7 @@
 <?php
+$toppage = "./form.html";
+
+
 $name = $_POST["name"];
 $radio = $_POST["radio"];
 $comment = $_POST["comment"];
@@ -11,6 +14,7 @@ $name = str_replace("\r\n","",$name);
 $radio = str_replace("\r\n","",$radio);
 $comment = str_replace("\r\n","",$comment);
 
+//入力チェック
 if($name == ""){
     error("名前が未入力です");
 }
@@ -18,6 +22,7 @@ if($comment == ""){
     error("コメントが未入力です");
 }
 
+//分岐チェック
 if($_POST["mode"] == "post"){
     conf_form();
 }
@@ -49,11 +54,11 @@ function conf_form(){
 function error($msg){
     //テンプレート読み込み
     $error = fopen("tmpl/error.tmpl","r");
-    $size = filesize("tmpl/error.tmpl","r");
+    $size = filesize("tmpl/error.tmpl");
     $data = fread($error,$size);
-
+    fclose($error);
     //文字置き換え
-    $data = str_replace("!errorm!",$msg,$data);
+    $data = str_replace("!errorm!", $msg, $data);
     
     echo $data;
     exit;
@@ -61,16 +66,16 @@ function error($msg){
 //データベースに飛ぶ
 
 function send_form(){
-    try{
         global $name;
         global $radio;
-        global $comment;
+        global $comment;    
+    try{
         $dsn = 'mysql:host=localhost; dbname=ensyu; charset=utf8';
         $user = 'testuser';
         $pass = 'testpass';
-        $dbh = new PDO($dsn,$user,$pass);
-        $dbh = setAttribute(PDO::ATTR_ERRMODE, PDD::ERRMODE_EXCEPTION);
-        if($dbh == null){
+        $dbh = new PDO($dsn, $user, $pass);
+        $dbh -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if ($dbh == null){
 
         }
         else{
@@ -95,7 +100,19 @@ function send_form(){
         echo "エラー内容".$e->getMEssage();
         die();
     }
+    //送信完了画面
+    $conf = fopen("tmpl/send.tmpl","r") or die;
+    $size = filesize("tmpl/send.tmpl");
+    $data = fread($conf , $size);
+    fclose($conf);
+
+    global $toppage;
+    $data = str_replace("!mainp!",$toppage, $data);
+
+    echo $data;
+    exit;
 }
+
 
 
 ?>
