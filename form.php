@@ -1,19 +1,18 @@
-
 <?php
-
-
+//送信後画面からの戻り先
 $toppage = "./form.html";
 
+//入力情報の受け取りと加工
 $name = $_POST["name"];
 $radio = filter_input(INPUT_POST,"radio");
 $comment = $_POST["comment"];
 
+//無効化
 $name = htmlentities($name,ENT_QUOTES,"UTF-8");
-// $radio = htmlentities($radio,ENT_QUOTES,"UTF-8");
 $comment = htmlentities($comment,ENT_QUOTES,"UTF-8");
 
+//改行処理
 $name = str_replace("\r\n","",$name);
-// $radio = str_replace("\r\n","",$radio);
 $comment = str_replace("\r\n","",$comment);
 
 //入力チェック
@@ -51,6 +50,7 @@ function conf_form(){
     $data = str_replace("!radio!",$radio,$data);
     $data = str_replace("!comment!",$comment,$data);
 
+    //表示
     echo $data;
     exit;
 }
@@ -61,14 +61,16 @@ function error($msg){
     $size = filesize("tmpl/error.tmpl");
     $data = fread($error,$size);
     fclose($error);
+
     //文字置き換え
     $data = str_replace("!errorm!", $msg, $data);
     
+    //表示
     echo $data;
     exit;
 }
-//データベースに飛ぶ
 
+//データベースに飛ぶ
 function send_form(){
         global $name;
         global $radio;
@@ -83,18 +85,10 @@ function send_form(){
 
         }
         else{
-            $SQL = "INSERT INTO form(お名前)VALUES(:name)";
-            $stmt1 = $dbh -> prepare($SQL);
-            $stmt1 ->bindParam(":name",$name);
-            $stmt1 ->execute();
-
-            $SQL = "INSERT INTO form(好きな季節)VALUES(:radio)";
-            $stmt2 = $dbh -> prepare($SQL);
-            $stmt2 ->bindParam(":radio",$radio);
-            $stmt2 ->execute();
-
-            $SQL = "INSERT INTO form(理由)VALUES(:comment)";
+            $SQL = "INSERT INTO form(お名前,好きな季節,理由)VALUES(:name,:radio,:comment)";
             $stmt3 = $dbh -> prepare($SQL);
+            $stmt3 ->bindParam(":name",$name);
+            $stmt3 ->bindParam(":radio",$radio);
             $stmt3 ->bindParam(":comment",$comment);
             $stmt3 ->execute();
         }
@@ -113,25 +107,24 @@ function send_form(){
     global $toppage;
     $data = str_replace("!mainp!",$toppage, $data);
     
-    // echo '<span style="color: black">'.$data.'</span>';
-if($radio == "春"){
-    echo "<span style=\"color: #c0029d;\">{$data}</span>";
-    
-    exit;
-}
-elseif ($radio == "夏"){
-    echo "<span style=\"color: #165df4;\">{$data}</span>";
-    exit;
-}
-elseif ($radio == "秋"){
-    echo "<span style=\"color: #ad2405;\">{$data}</span>";
-    exit;
-}
-else{
-    echo "<span style=\"color: #6e5e5b;\">{$data}</span>";
-    exit;
-}
-    
+    //文字力の変化の記述
+    if($radio == "春"){
+        echo "<span style=\"color: #c0029d;\">{$data}</span>";
+        
+        exit;
+    }
+    elseif ($radio == "夏"){
+        echo "<span style=\"color: #165df4;\">{$data}</span>";
+        exit;
+    }
+    elseif ($radio == "秋"){
+        echo "<span style=\"color: #ad2405;\">{$data}</span>";
+        exit;
+    }
+    else{
+        echo "<span style=\"color: #6e5e5b;\">{$data}</span>";
+        exit;
+    }
 }
 
 ?>

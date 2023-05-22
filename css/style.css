@@ -10,14 +10,14 @@ img{
 
 .img2{
     width: 100%;
-    margin-top: 140px;
+    margin-top: 180px;
 }
 
 h1{
     background-color: rgb(255, 255, 255);
-    color: #fff;
+    color: rgb(0, 0, 0);
     border-radius: 30px;
-    text-shadow: 0.2mm 0.2mm 1mm #137075;
+    text-shadow: 0.5mm 0.5mm 0mm #bbff9c;
     box-shadow: 0px 0px 4px #acacac;
     width: 790px;
     height: 60px;
@@ -97,10 +97,9 @@ h1{
 .con_fo p{
         
     margin: 0 auto 20px auto;
-    border-bottom: 1px solid #c2c2c2;
+    border-bottom: 2px solid #c2c2c2;
     width: 400px;
     text-align: left;
-    font-weight: bold;
     
 }
 
@@ -115,4 +114,8 @@ h1{
 
 .er{
     text-align: center;
+    font-size: 1.2rem;
+}
+.erp{
+    color: #ff0000;
 }
