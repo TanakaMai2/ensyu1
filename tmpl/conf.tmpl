@@ -12,21 +12,21 @@
 <p class="con_p">内容ご確認の上、よろしければ送信ボタンを押してください</p>
 <div class="con_fo">
     <p>
-        ●お名前：<span>!name!</span>
+        お名前：<span>!name!</span>
     </p>
     <p>
-        ●好きな季節：<span>!radio!</span>
+        好きな季節：<span>!radio!</span>
     </p>
     <p>
-        ●理由：<span>!comment!</span>
+        理由：<span>!comment!</span>
     </p>
     <form action="form.php" method="post">
     <input type="hidden" name="mode" value="send">
     <input type="hidden" name="name" value="!name!">
     <input type="hidden" name="radio" value="!radio!">
     <input type="hidden" name="comment" value="!comment!">
-    <input type="button" value="前に戻る" onclick="history.back()">
-    <input type="submit" value="送信する">
+    <input type="button" value="前に戻る" onclick="history.back()" class="input3">
+    <input type="submit" value="送信する" class="input2">
     </form>
 </div>
 </body>

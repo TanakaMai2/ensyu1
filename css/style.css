@@ -3,14 +3,116 @@ body{
     margin: 0 auto;
 }
 
+img{
+    width: 100%;
+    margin-top: 40px;
+}
+
+.img2{
+    width: 100%;
+    margin-top: 140px;
+}
+
 h1{
-    background-color: rgb(255, 247, 223);
+    background-color: rgb(255, 255, 255);
     color: #fff;
-    text-shadow: 0.2mm 0.2mm 1.5mm #ac6700;
+    border-radius: 30px;
+    text-shadow: 0.2mm 0.2mm 1mm #137075;
+    box-shadow: 0px 0px 4px #acacac;
+    width: 790px;
+    height: 60px;
+    line-height: 60px;
     text-align: center;
 }
 
 .fo{
     margin: 0 auto;
+    text-align: center;
+
+
+}
+
+.fo_p{
+    border-bottom: 2px solid #eeeeee;
+    width: 400px;
+    margin: 40px auto 10px auto ;
+    text-align: left;
+    font-weight: bold;
+}
+
+.fo p{
+    margin-bottom: 10px;
+}
+#kisetu{
+    width: 40px;
+}
+.hoge{
+    width: 400px;
+}
+
+.input{
+    background-color: aliceblue;
+}
+
+.input2{
+    border: 2px solid #ffb004;
+    border-radius: 5px;
+    width: 95px;
+    height: 30px;
+    background-color: #fff0af;
+}
+.input2:hover{
+    
+    background-color: rgb(255, 253, 230);
+}
+
+.input3{
+    border: 2px solid #6b96a7;
+    border-radius: 5px;
+    width: 95px;
+    height: 30px;
+    background-color: #cbfffc;
+}
+.input3:hover{
+    
+    background-color: rgb(233, 251, 250);
+}
+
+.con_p{
+    text-align: center;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #b9ff73;
+    box-shadow: 0px 1px 5px #9c9e9a;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+.con_fo{
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+.con_fo p{
+        
+    margin: 0 auto 20px auto;
+    border-bottom: 1px solid #c2c2c2;
+    width: 400px;
+    text-align: left;
+    font-weight: bold;
+    
+}
+
+.send_p{
+    font-size: 1.5rem;
+    margin-top: 50px;
+    font-weight: bold;
+}
+.send{
+    text-align: center;
+}
+
+.er{
     text-align: center;
 }

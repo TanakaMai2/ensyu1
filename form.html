@@ -6,33 +6,31 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>アンケート</h1>
+        <h1>好きな季節アンケート</h1>
     <div class="fo">
     <form action="form.php" method="post">
-        <p class="form_p">
-            お名前<br>
-            <input type="text" name="name" placeholder="山田 太郎">
+        <p><div class="fo_p">お名前<br></div>
+            <input type="text" name="name" placeholder="山田 太郎" class="hoge">
         </p>
-        <p class="form_p">
-            好きな季節<br>
-            <input type="radio" name="radio" value="春">春
-            <input type="radio" name="radio" value="夏">夏
-            <input type="radio" name="radio" value="秋">秋
-            <input type="radio" name="radio" value="冬">冬
+        <p><div class="fo_p">好きな季節<br></div>
+            <label><input type="radio" name="radio" value="春" id="kisetu">春</label>
+            <label><input type="radio" name="radio" value="夏" id="kisetu">夏</label>
+            <label><input type="radio" name="radio" value="秋" id="kisetu">秋</label>
+            <label><input type="radio" name="radio" value="冬" id="kisetu">冬</label>
         </p>
-        <p class="form_p">
-            理由<br>
-            <textarea name="comment" cols="30" rows="10">
-            </textarea>
+        <p><div class="fo_p">理由<br></div>
+            <textarea name="comment" cols="30" rows="10" class="hoge"></textarea>
         </p>
 
-        <p class="form_p">
-            <input type="submit" name="sub" value="確認">
+        <p>
+            <input type="submit" name="sub" value="確認" class="input2"> 
         </p>
 
         <input type="hidden" name="mode" value="post">
     </form>
+    <div class="img"><img src="img/haikei.jpg" alt="四季"></div>
     </div>
+    <!-- <img src="img/haru.png" alt="春"> -->
 
 
 </body>

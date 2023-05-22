@@ -1,27 +1,31 @@
+
 <?php
+
+
 $toppage = "./form.html";
 
-
 $name = $_POST["name"];
-$radio = $_POST["radio"];
+$radio = filter_input(INPUT_POST,"radio");
 $comment = $_POST["comment"];
 
 $name = htmlentities($name,ENT_QUOTES,"UTF-8");
-$radio = htmlentities($radio,ENT_QUOTES,"UTF-8");
+// $radio = htmlentities($radio,ENT_QUOTES,"UTF-8");
 $comment = htmlentities($comment,ENT_QUOTES,"UTF-8");
 
 $name = str_replace("\r\n","",$name);
-$radio = str_replace("\r\n","",$radio);
+// $radio = str_replace("\r\n","",$radio);
 $comment = str_replace("\r\n","",$comment);
 
 //入力チェック
 if($name == ""){
-    error("名前が未入力です");
+    error("名前を入力してください");
+}
+if(is_NULL($radio)){
+    error("好きな季節を選択してください");
 }
 if($comment == ""){
-    error("コメントが未入力です");
+    error("コメントが入力してください");
 }
-
 //分岐チェック
 if($_POST["mode"] == "post"){
     conf_form();
@@ -45,7 +49,7 @@ function conf_form(){
     //文字置き換え
     $data = str_replace("!name!",$name,$data);
     $data = str_replace("!radio!",$radio,$data);
-    $data = str_replace("!comment",$comment,$data);
+    $data = str_replace("!comment!",$comment,$data);
 
     echo $data;
     exit;
@@ -108,11 +112,26 @@ function send_form(){
 
     global $toppage;
     $data = str_replace("!mainp!",$toppage, $data);
-
-    echo $data;
+    
+    // echo '<span style="color: black">'.$data.'</span>';
+if($radio == "春"){
+    echo "<span style=\"color: #c0029d;\">{$data}</span>";
+    
     exit;
 }
-
-
+elseif ($radio == "夏"){
+    echo "<span style=\"color: #165df4;\">{$data}</span>";
+    exit;
+}
+elseif ($radio == "秋"){
+    echo "<span style=\"color: #ad2405;\">{$data}</span>";
+    exit;
+}
+else{
+    echo "<span style=\"color: #6e5e5b;\">{$data}</span>";
+    exit;
+}
+    
+}
 
 ?>
